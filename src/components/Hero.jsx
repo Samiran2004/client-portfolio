@@ -1,7 +1,9 @@
 import React from "react";
 import { profileData } from "../constants/portfolioData";
 import demo from "../assets/demo.jpg";
+
 import Stats from "./stats"; // Import the Stats component
+
 
 const Hero = () => {
   return (
@@ -25,7 +27,7 @@ const Hero = () => {
               Download CV
             </button>
           </div>
-        </div>
+
 
         {/* right */}
         <div className="w-1/2 flex items-center justify-center cursor-pointer">
