@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaArrowRight } from "react-icons/fa";  // Importing the arrow icon
+import { FaArrowRight } from "react-icons/fa"; // Correct import for the arrow icon
 
 const projects = [
   {
@@ -131,15 +131,14 @@ export default function ProjectsSection() {
         </motion.div>
 
         {/* View All Projects Button */}
-        <div className="mt-12">
-          <motion.button
-            className="flex items-center px-6 py-3 text-lg font-semibold text-white bg-blue-700 rounded-full transition-all duration-300 hover:bg-blue-800 hover:scale-105"
-            whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.3 }}
+        <div className="mt-6">
+          <a
+            href="#"
+            className="inline-flex items-center px-6 py-3 rounded-full border border-gray-800 text-gray-800 font-medium group hover:bg-gray-800 hover:text-white hover:shadow-xl transition duration-300"
           >
-            <span>View All Projects</span>
-            <FaArrowRight className="ml-3" />
-          </motion.button>
+            View All Projects
+            <FaArrowRight className="ml-2 transition-transform group-hover:translate-x-1" size={20} />
+          </a>
         </div>
       </div>
     </section>
