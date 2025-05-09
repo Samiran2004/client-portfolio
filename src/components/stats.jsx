@@ -1,10 +1,10 @@
 import React from "react";
 
 const stats = [
-  { number: "15+", label: "Years Experience" },
-  { number: "50+", label: "Published Papers" },
-  { number: "200+", label: "Students Mentored" },
-  { number: "25+", label: "Industry Projects" },
+  { number: "15", label: "Years Experience" },
+  { number: "50", label: "Published Papers" },
+  { number: "200", label: "Students Mentored" },
+  { number: "25", label: "Industry Projects" },
 ];
 
 const Stats = () => {
@@ -28,16 +28,15 @@ const Stats = () => {
       {stats.map((stat, index) => (
         <div
           key={index}
-          className="text-center text-white p-6 opacity-0 transform transition-all duration-500 hover:scale-105 hover:bg-blue-800 hover:shadow-2xl"
+          className="text-center cursor-pointer rounded-xl text-white p-6 opacity-0 transform transition-all duration-500 hover:scale-105 hover:bg-blue-800 hover:shadow-2xl"
           style={{
             animation: "fadeInUp 0.8s ease-out forwards",
             animationDelay: `${index * 0.3}s`,
           }}
         >
-          <h2 className="text-4xl font-bold">{stat.number}</h2>
-          <p className="text-gray-300 mt-2">{stat.label}</p>
-          {/* White underline */}
-          <div className="border-b-4 border-white w-3/4 mx-auto mt-4"></div>
+          <h2 className="text-4xl font-bold">{stat.number}+</h2>
+          <p className="text-gray-300 mt-2 text-xl text-center">{stat.label}</p>
+          <div className="mt-4 border-b border-gray-300 border-4 "></div>
         </div>
       ))}
     </div>
