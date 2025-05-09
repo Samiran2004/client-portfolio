@@ -1,6 +1,7 @@
 import React from "react";
 import { profileData } from "../constants/portfolioData";
 import demo from "../assets/demo.jpg";
+import DownloadCBButton from "./Buttons/DownloadCVButton";
 
 const Hero = () => {
   return (
@@ -15,12 +16,14 @@ const Hero = () => {
         </p>
 
         <div className="flex gap-4 mt-4">
-          <button className="btn btn-primary shadow-none btn-xl">
+          {/* <button className="btn btn-primary shadow-none btn-xl">
             Get in Touch
-          </button>
-          <button className="btn btn-primary shadow-none btn-soft btn-xl">
+          </button> */}
+          <DownloadCBButton message="Get In Touch"/>
+          {/* <button className="btn btn-primary shadow-none btn-soft btn-xl">
             Download CV
-          </button>
+          </button> */}
+          <DownloadCBButton message="Download CV"/>
         </div>
       </div>
       {/* right */}
