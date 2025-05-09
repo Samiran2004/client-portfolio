@@ -17,4 +17,5 @@ If you are developing a production application, we recommend using TypeScript wi
 for run this first install - frammer motion 
 then --- install react icons 
 then -----npm install react-intersection-observer
+then ------npm install lucide-react
 then ---- npm run dev
