@@ -28,7 +28,7 @@ const Stats = () => {
       {stats.map((stat, index) => (
         <div
           key={index}
-          className="text-center cursor-pointer rounded-xl text-white p-6 opacity-0 transform transition-all duration-500 hover:scale-105 hover:bg-blue-800 hover:shadow-2xl"
+          className="text-center cursor-pointer rounded-xl text-white p-6 opacity-0 transform transition-all duration-500 hover:scale-105 hover:bg-primary hover:shadow-2xl"
           style={{
             animation: "fadeInUp 0.8s ease-out forwards",
             animationDelay: `${index * 0.3}s`,
