@@ -61,8 +61,8 @@ const Education = () => {
       className="py-14 bg-gradient-to-b from-gray-50 to-white"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Section Header with Image */}
-        <div className="flex flex-col items-center mb-8">
+        {/* Section Header */}
+        <div className="flex flex-col items-center mb-16">
           <motion.div
             className="text-center"
             initial="hidden"
@@ -82,34 +82,8 @@ const Education = () => {
 
         {/* Education Timeline */}
         <div className="grid lg:grid-cols-3 gap-8 mb-16">
-          {/* Left Side Image */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="hidden lg:block"
-          >
-            <div className="sticky top-24">
-              <motion.img
-                src="https://images.pexels.com/photos/207692/pexels-photo-207692.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                alt="Education Journey"
-                className="rounded-2xl cursor-pointer shadow-lg object-cover h-[400px] w-full"
-                whileHover={{ scale: 1.01 }}
-                transition={{ duration: 0.3 }}
-              />
-              <div className="mt-4 text-center">
-                <h4 className="text-lg font-semibold text-gray-800">
-                  Educational Journey
-                </h4>
-                <p className="text-gray-600 text-sm">
-                  Building foundations for innovation
-                </p>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Timeline Cards */}
-          <div className="lg:col-span-2">
+          {/* Timeline Cards - Now on the left */}
+          <div className="lg:col-span-2 order-2 lg:order-1">
             <motion.div
               className="grid gap-6"
               variants={containerVariants}
@@ -128,6 +102,32 @@ const Education = () => {
               ))}
             </motion.div>
           </div>
+
+          {/* Right Side Image */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }} // Changed from x: -20 to x: 20
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="hidden lg:block order-1 lg:order-2"
+          >
+            <div className="sticky top-24">
+              <motion.img
+                src="https://images.pexels.com/photos/207692/pexels-photo-207692.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                alt="Education Journey"
+                className="rounded-2xl shadow-lg object-cover h-[400px] w-full"
+                whileHover={{ scale: 1.01 }}
+                transition={{ duration: 0.3 }}
+              />
+              <div className="mt-4 text-center">
+                <h4 className="text-lg font-semibold text-gray-800">
+                  Educational Journey
+                </h4>
+                <p className="text-gray-600 text-sm">
+                  Building foundations for innovation
+                </p>
+              </div>
+            </div>
+          </motion.div>
         </div>
 
         {/* Skills Section */}
@@ -146,7 +146,7 @@ const Education = () => {
               <motion.span
                 key={index}
                 variants={fadeInUp}
-                className="px-4 cursor-pointer py-2 bg-blue-50 text-blue-600 rounded-full text-sm font-medium hover:bg-blue-100 transition-colors duration-300"
+                className="px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-sm font-medium hover:bg-blue-100 transition-colors duration-300"
               >
                 {skill}
               </motion.span>
