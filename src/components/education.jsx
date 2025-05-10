@@ -1,93 +1,161 @@
-import React from "react";
+import { motion } from "framer-motion";
+import { profileData } from "../constants/portfolioData";
+import { GraduationCap, Building, Calendar, FileText } from "lucide-react";
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const EducationCard = ({ date, title, org, desc }) => (
+  <motion.div
+    variants={fadeInUp}
+    className="bg-white cursor-pointer rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100"
+  >
+    <div className="flex items-start gap-4">
+      <div className="bg-blue-50 p-3 rounded-lg">
+        <GraduationCap className="w-6 h-6 text-primary" />
+      </div>
+      <div className="flex-1">
+        <span className="text-sm text-primary font-medium">
+          <Calendar className="w-4 h-4 inline-block mr-2" />
+          {date}
+        </span>
+        <h4 className="text-lg font-semibold text-gray-800 mt-1">{title}</h4>
+        <p className="text-gray-600 flex items-center gap-2 mt-1">
+          <Building className="w-4 h-4" />
+          {org}
+        </p>
+        {desc && (
+          <p className="text-gray-500 mt-2 text-sm flex items-start gap-2">
+            <FileText className="w-4 h-4 mt-1" />
+            {desc}
+          </p>
+        )}
+      </div>
+    </div>
+  </motion.div>
+);
 
 const Education = () => {
-    return (
-        <section id="education" className="py-16 bg-gray-50 relative">
-            {/* Custom Keyframe Style */}
-            <style>{`
-        @keyframes wiggle {
-          0%, 100% { transform: translateX(-50%) scaleX(1); }
-          50% { transform: translateX(-50%) scaleX(1.2); }
-        }
-      `}</style>
+  return (
+    <section
+      id="education"
+      className="py-14 bg-gradient-to-b from-gray-50 to-white"
+    >
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        {/* Section Header with Image */}
+        <div className="flex flex-col items-center mb-8">
+          <motion.div
+            className="text-center"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+              Education
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Academic journey and qualifications shaping expertise in
+              mechanical engineering and advanced materials research
+            </p>
+          </motion.div>
+        </div>
 
-            <div className="container mx-auto px-4">
-                {/* Creative Heading */}
-                <h2 className="text-4xl font-extrabold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-600 relative flex justify-center items-center">
-                    Education
-                    <span
-                        className="absolute left-1/2 transform -translate-x-1/2 -bottom-2 w-28 h-[6px] bg-blue-400 rounded-full"
-                        style={{ animation: "wiggle 1.5s ease-in-out infinite" }}
-                    ></span>
-                </h2>
-
-                <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-                    {/* Academic Journey */}
-                    <div className="order-1 lg:order-1">
-                        <h3 className="text-2xl font-semibold mb-6 text-indigo-700">
-                            Academic Journey
-                        </h3>
-                        <div className="relative pl-8 border-l-2 border-indigo-500">
-                            {[
-                                {
-                                    date: "2015 - 2019",
-                                    title: "Doctor of Philosophy",
-                                    org: "Academy of Scientific and Innovative Research (AcSIR), CSIR-CMERI Campus",
-                                    desc: "Thesis title: Development and characterization of carbon fiber reinforced epoxy composite by incorporating surface modified graphene",
-                                },
-                                {
-                                    date: "2009 - 2013",
-                                    title: "B.Tech in Mechanical Engineering",
-                                    org: "West Bengal University of Technology",
-                                    desc: "Focus: Thermodynamics and Energy Systems",
-                                },
-                                {
-                                    date: "2006 - 2008",
-                                    title: "Higher Secondary",
-                                    org: "West Bengal Council of Higher Secondary Education",
-                                    desc: "1st Division, 71.2%",
-                                },
-                            ].map((item, idx) => (
-                                <div key={idx} className="relative mb-12 group">
-                                    {/* Timeline Dot */}
-                                    <div className="absolute -left-4 top-2 w-4 h-4 bg-indigo-600 rounded-full border-4 border-white shadow-md group-hover:scale-125 transition-transform duration-300 z-10"></div>
-                                    {/* Timeline Content */}
-                                    <div className="bg-white rounded-lg shadow-md p-5 transition-transform duration-300 group-hover:-translate-y-1">
-                                        <div className="text-sm text-gray-500">{item.date}</div>
-                                        <h4 className="text-lg font-semibold text-indigo-700 mt-1">{item.title}</h4>
-                                        <p className="text-gray-700">{item.org}</p>
-                                        <p className="text-gray-600 mt-1">{item.desc}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Educational Philosophy */}
-                    <div className="order-2 lg:order-2">
-                        <h3 className="text-2xl font-semibold mb-6 text-indigo-700">
-                            Educational Philosophy
-                        </h3>
-                        <p className="text-gray-700 mb-6 leading-relaxed">
-                            My teaching approach combines rigorous theoretical foundations with hands-on
-                            practical applications. I believe in creating an inclusive learning environment
-                            where students develop critical thinking skills through real-world problem solving.
-                        </p>
-                        <div className="relative group">
-                            <img
-                                className="rounded-xl shadow-lg transition-transform duration-300 group-hover:scale-105"
-                                src="https://images.pexels.com/photos/2041627/pexels-photo-2041627.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                                alt="Collaborative Learning Environment"
-                            />
-                            <div className="absolute bottom-2 left-2 bg-white/80 text-sm text-gray-800 px-3 py-1 rounded shadow-md">
-                                Collaborative Learning Environment
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        {/* Education Timeline */}
+        <div className="grid lg:grid-cols-3 gap-8 mb-16">
+          {/* Left Side Image */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="hidden lg:block"
+          >
+            <div className="sticky top-24">
+              <motion.img
+                src="https://images.pexels.com/photos/207692/pexels-photo-207692.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                alt="Education Journey"
+                className="rounded-2xl cursor-pointer shadow-lg object-cover h-[400px] w-full"
+                whileHover={{ scale: 1.01 }}
+                transition={{ duration: 0.3 }}
+              />
+              <div className="mt-4 text-center">
+                <h4 className="text-lg font-semibold text-gray-800">
+                  Educational Journey
+                </h4>
+                <p className="text-gray-600 text-sm">
+                  Building foundations for innovation
+                </p>
+              </div>
             </div>
-        </section>
-    );
+          </motion.div>
+
+          {/* Timeline Cards */}
+          <div className="lg:col-span-2">
+            <motion.div
+              className="grid gap-6"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {profileData.education.map((edu, index) => (
+                <EducationCard
+                  key={index}
+                  date={edu.year}
+                  title={edu.degree}
+                  org={edu.institute}
+                  desc={edu.desc}
+                />
+              ))}
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Skills Section */}
+        <motion.div
+          className="mt-16"
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <h3 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
+            Key Skills & Expertise
+          </h3>
+          <div className="flex flex-wrap justify-center gap-3">
+            {profileData.skills.map((skill, index) => (
+              <motion.span
+                key={index}
+                variants={fadeInUp}
+                className="px-4 cursor-pointer py-2 bg-blue-50 text-blue-600 rounded-full text-sm font-medium hover:bg-blue-100 transition-colors duration-300"
+              >
+                {skill}
+              </motion.span>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
 };
 
 export default Education;

@@ -46,15 +46,15 @@ const Navbar = () => {
       <div className="hidden md:flex space-x-8">
         <ul className="flex space-x-2 text-lg font-medium">
           <li className="px-4 py-2 hover:bg-gray-100">
-            <Link className="text-blue-600" to="/home">
+            <Link className="text-blue-600" to="/">
               Home
             </Link>
           </li>
           <li className="px-4 py-2 hover:bg-gray-100">
-            <Link to="/about">About</Link>
+            <Link to="/">About</Link>
           </li>
           <li className="px-4 py-2 hover:bg-gray-100">
-            <Link to="/contact">Contact</Link>
+            <Link to="/">Contact</Link>
           </li>
         </ul>
       </div>
