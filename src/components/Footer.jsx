@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ChevronUp } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Tooltip } from 'react-tooltip';
+import { profileData } from "../constants/portfolioData";
 
 export default function Footer() {
   const [showButton, setShowButton] = useState(false);
@@ -10,15 +11,17 @@ export default function Footer() {
   useEffect(() => {
     const toggleVisibility = () => {
       setShowButton(window.scrollY > 200);
-      const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      const scrolled =
+        (window.scrollY / (document.body.scrollHeight - window.innerHeight)) *
+        100;
       setScrollPercent(scrolled.toFixed(0));
     };
-    window.addEventListener('scroll', toggleVisibility);
-    return () => window.removeEventListener('scroll', toggleVisibility);
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -33,7 +36,7 @@ export default function Footer() {
           {/* Info Section */}
           <div>
             <h2 className="text-3xl font-extrabold bg-gradient-to-r from-teal-400 to-cyan-500 bg-clip-text text-transparent mb-3">
-              <a href="/">Dr. Engineer Portfolio</a>
+              <a href="/">{profileData.name}</a>
             </h2>
             <p className="text-gray-400 text-sm leading-relaxed">
               Bridging the gap between theoretical knowledge and practical
@@ -42,26 +45,47 @@ export default function Footer() {
           </div>
 
           {/* Navigation */}
-          <nav aria-label="Footer navigation" className="grid grid-cols-2 gap-10 text-sm">
+          <nav
+            aria-label="Footer navigation"
+            className="grid grid-cols-2 gap-10 text-sm"
+          >
             <div>
-              <h3 className="text-lg font-semibold text-teal-300 mb-3">Navigation</h3>
+              <h3 className="text-lg font-semibold text-teal-300 mb-3">
+                Navigation
+              </h3>
               <ul className="space-y-2 text-gray-300">
-                {['Home', 'About', 'Education', 'Teaching', 'Research'].map(item => (
-                  <li key={item}>
-                    <a href={`#${item.toLowerCase()}`} className="hover:text-white transition-all duration-200 hover:pl-1">
-                      {item}
-                    </a>
-                  </li>
-                ))}
+                {["Home", "About", "Education", "Teaching", "Research"].map(
+                  (item) => (
+                    <li key={item}>
+                      <a
+                        href={`#${item.toLowerCase()}`}
+                        className="hover:text-white transition-all duration-200 hover:pl-1"
+                      >
+                        {item}
+                      </a>
+                    </li>
+                  )
+                )}
               </ul>
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold text-teal-300 mb-3">Resources</h3>
+              <h3 className="text-lg font-semibold text-teal-300 mb-3">
+                Resources
+              </h3>
               <ul className="space-y-2 text-gray-300">
-                {['Publications', 'Projects', 'Testimonials', 'Contact', 'Privacy Policy'].map(item => (
+                {[
+                  "Publications",
+                  "Projects",
+                  "Testimonials",
+                  "Contact",
+                  "Privacy Policy",
+                ].map((item) => (
                   <li key={item}>
-                    <a href={`#${item.toLowerCase().replace(/ /g, '')}`} className="hover:text-white transition-all duration-200 hover:pl-1">
+                    <a
+                      href={`#${item.toLowerCase().replace(/ /g, "")}`}
+                      className="hover:text-white transition-all duration-200 hover:pl-1"
+                    >
                       {item}
                     </a>
                   </li>
@@ -72,7 +96,7 @@ export default function Footer() {
         </motion.div>
 
         {/* Footer Bottom */}
-        <div className="mt-10 border-t border-gray-700 pt-5 text-center text-gray-500 text-xs tracking-wide">
+        <div className="mt-10 border-t border-gray-700 py-5 text-center text-gray-500 text-xs tracking-wide">
           &copy; 2025 Dr. Engineer Portfolio. All rights reserved.
         </div>
       </div>

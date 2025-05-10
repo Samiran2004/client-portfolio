@@ -1,135 +1,167 @@
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import { Phone, Mail, MapPin, Clock, Linkedin, Twitter, Github } from 'lucide-react';
+import { profileData } from '../constants/portfolioData';
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
+const contactInfo = [
+  {
+    icon: <Phone className="w-6 h-6" />,
+    title: "Phone",
+    text: profileData.contact.phone,
+  },
+  {
+    icon: <Mail className="w-6 h-6" />,
+    title: "Email",
+    text: profileData.contact.email,
+  },
+  {
+    icon: <MapPin className="w-6 h-6" />,
+    title: "Address",
+    text: profileData.contact.address,
+  },
+  {
+    icon: <Clock className="w-6 h-6" />,
+    title: "Research IDs",
+    text: `Scopus ID: ${profileData.contact.scopusID}\nResearcher ID: ${profileData.contact.researcherID}`,
+  },
+];
 
 export default function ContactSection() {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
-
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 40 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-  };
-
   return (
-    <section id="contact" className="relative py-20 bg-gradient-to-b from-white via-slate-100 to-white text-slate-800">
-      <div className="container mx-auto px-6 md:px-12 lg:px-20">
-        <motion.h2
-          ref={ref}
-          variants={fadeInUp}
+    <section id="contact" className="py-24 bg-gradient-to-b from-gray-50 to-white">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        {/* Section Header */}
+        <motion.div
+          className="text-center mb-16"
           initial="hidden"
-          animate={inView ? "show" : "hidden"}
-          className="text-4xl md:text-5xl font-extrabold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
         >
-          Contact
-        </motion.h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            Contact
+          </h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Get in touch for research collaborations, consulting opportunities, or academic inquiries
+          </p>
+        </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-16 items-start">
+          {/* Contact Information */}
           <motion.div
             variants={fadeInUp}
             initial="hidden"
-            animate={inView ? "show" : "hidden"}
-            className="space-y-6"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="space-y-8"
           >
-            <h3 className="text-2xl font-bold text-blue-700">Get In Touch</h3>
-            <p className="text-lg leading-relaxed text-slate-700">
-              Feel free to contact me for consulting, research collaborations,
-              speaking engagements, or any questions you might have.
-            </p>
-
             <div className="space-y-6">
-              {[{
-                icon: '📞',
-                title: 'Phone',
-                text: '(123) 456-7890'
-              }, {
-                icon: '✉️',
-                title: 'Email',
-                text: 'contact@drengineer.com'
-              }, {
-                icon: '📍',
-                title: 'Office',
-                text: `123 University Boulevard\nEngineering Building, Room 456\nBerkeley, CA 94720`
-              }, {
-                icon: '⏰',
-                title: 'Office Hours',
-                text: 'Monday - Friday: 9:00 AM - 5:00 PM\nOr by appointment'
-              }].map(({ icon, title, text }) => (
-                <div className="flex items-start gap-4" key={title}>
-                  <div className="text-3xl">{icon}</div>
+              {contactInfo.map(({ icon, title, text }) => (
+                <div 
+                  key={title}
+                  className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+                >
+                  <div className="p-2 bg-blue-50 rounded-lg text-blue-600">
+                    {icon}
+                  </div>
                   <div>
-                    <h4 className="text-xl font-semibold text-blue-600">{title}</h4>
-                    <p className="whitespace-pre-line text-slate-600">{text}</p>
+                    <h4 className="text-lg font-semibold text-gray-800">{title}</h4>
+                    <p className="text-gray-600 whitespace-pre-line">{text}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="flex gap-4 mt-6">
-              {['linkedin', 'twitter', 'github', 'instagram'].map((platform, idx) => (
+            {/* Social Links */}
+            <motion.div 
+              variants={fadeInUp}
+              className="flex gap-4"
+            >
+              {[
+                { icon: <Linkedin className="w-5 h-5" />, label: "LinkedIn" },
+                { icon: <Github className="w-5 h-5" />, label: "Github" },
+                { icon: <Twitter className="w-5 h-5" />, label: "Twitter" },
+              ].map(({ icon, label }) => (
                 <a
-                  key={platform}
+                  key={label}
                   href="#"
-                  className="w-10 h-10 rounded-full bg-blue-600 hover:bg-purple-600 flex items-center justify-center text-white text-xl transition duration-300"
+                  className="p-3 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors duration-300"
+                  aria-label={label}
                 >
-                  {['in', 'X', 'GH', 'IG'][idx]}
+                  {icon}
                 </a>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
 
+          {/* Contact Form */}
           <motion.div
             variants={fadeInUp}
             initial="hidden"
-            animate={inView ? "show" : "hidden"}
-            className="bg-white p-8 rounded-2xl shadow-2xl border border-slate-200"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="bg-white p-8 rounded-xl shadow-lg border border-gray-100"
           >
-            <form id="contactForm" className="space-y-6">
-              <div className="form-group">
-                <label htmlFor="name" className="block mb-2 font-semibold">Name</label>
+            <form className="space-y-6">
+              <div>
+                <label htmlFor="name" className="block mb-2 text-gray-700 font-medium">
+                  Name
+                </label>
                 <input
                   type="text"
                   id="name"
-                  name="name"
                   required
-                  className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
                 />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="email" className="block mb-2 font-semibold">Email</label>
+              <div>
+                <label htmlFor="email" className="block mb-2 text-gray-700 font-medium">
+                  Email
+                </label>
                 <input
                   type="email"
                   id="email"
-                  name="email"
                   required
-                  className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
                 />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="subject" className="block mb-2 font-semibold">Subject</label>
+              <div>
+                <label htmlFor="subject" className="block mb-2 text-gray-700 font-medium">
+                  Subject
+                </label>
                 <input
                   type="text"
                   id="subject"
-                  name="subject"
                   required
-                  className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
                 />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="message" className="block mb-2 font-semibold">Message</label>
+              <div>
+                <label htmlFor="message" className="block mb-2 text-gray-700 font-medium">
+                  Message
+                </label>
                 <textarea
                   id="message"
-                  name="message"
                   rows="5"
                   required
-                  className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none resize-none"
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3 px-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-purple-600 hover:to-blue-600 text-white font-semibold rounded-lg shadow-lg transition-all duration-300"
+                className="w-full py-3 px-6 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-300"
               >
                 Send Message
               </button>
