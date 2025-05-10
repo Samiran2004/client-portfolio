@@ -1,59 +1,96 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { FaArrowRight } from "react-icons/fa"; // Correct import for the arrow icon
+import { motion } from "framer-motion"; 
+import { FaArrowRight } from "react-icons/fa";
+import DImg from "../assets/4d image.jpg";
+import hybrid from "../assets/hybrid.jpg";
+import magnet from "../assets/magnet.jpg";
+import hydrogen from "../assets/hydrogen.jpg";
+import epoxy from "../assets/epoxy.jpg";
+import graphene from "../assets/graphene.jpg";
 
 const projects = [
   {
     id: 101,
     title: "4D Printed Thermo-Responsive Hydrogel Actuators",
-    category: "AI",
+    category: "4D Printing",
     description:
       "Design and analysis of smart actuators using 4D printing techniques for solar steam generation, with thermo-aqueous coupling modeling and finite element analysis.",
-    image: "https://source.unsplash.com/400x300/?4dprinting,actuator",
+    image: DImg,
   },
   {
     id: 102,
     title: "Graphene Hybrid Composites for EMI Shielding",
-    category: "IoT",
+    category: "Hybrid",
     description:
       "Developed high-performance nanocomposites for electromagnetic interference shielding by integrating graphene into carbon fiber epoxy structures.",
-    image: "https://source.unsplash.com/400x300/?graphene,composite",
+    image: hybrid,
   },
   {
     id: 103,
     title: "Magnetoelectric Nanocomposite Inks for Wearable Electronics",
-    category: "AI",
+    category: "Hybrid",
     description:
       "Synthesized and patented 3D-printable magnetoelectric inks for additive manufacturing of wearable electronics and soft robotics.",
-    image: "https://source.unsplash.com/400x300/?ink,wearable",
+    image: magnet,
   },
   {
     id: 104,
     title: "Type-IV Hydrogen Storage Composite Cylinder",
-    category: "Web",
+    category: "Hydrogen",
     description:
       "Designed and tested filament-wound high-pressure FRP composite cylinders suitable for hydrogen storage under varying mechanical loads.",
-    image: "https://source.unsplash.com/400x300/?hydrogen,cylinder",
+    image: hydrogen,
   },
   {
     id: 105,
     title: "Epoxy-Based Solid Electrolytes for Energy Storage",
-    category: "IoT",
+    category: "Hybrid",
     description:
       "Developed multifunctional polymer composites with solid-state electrolytes, targeting applications in structural batteries and supercapacitors.",
-    image: "https://source.unsplash.com/400x300/?epoxy,battery",
+    image: epoxy,
   },
   {
     id: 106,
     title: "Graphene-Based Bulletproof Laminate",
-    category: "Web",
+    category: "Graphene",
     description:
       "Developed advanced composite laminate with graphene for mob control vehicles, transferred to DRDO for tactical use.",
-    image: "https://source.unsplash.com/400x300/?bulletproof,laminate",
+    image: graphene,
   },
 ];
 
-const categories = ["All", "IoT", "Web", "AI"];
+const categories = ["All", "Hybrid", "Hydrogen", "Graphene"];
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 },
+  },
+};
+
+const ProjectCard = ({ project }) => (
+  <motion.div
+    variants={fadeInUp}
+    className="bg-white shadow-lg rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300"
+  >
+    <img
+      src={project.image}
+      alt={project.title}
+      className="w-full h-48 object-cover"
+    />
+    <div className="p-6 text-left">
+      <h3 className="text-xl font-bold text-gray-800 mb-2">{project.title}</h3>
+      <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+        {project.description}
+      </p>
+      <span className="inline-block bg-blue-50 text-primary text-xs px-3 py-1 rounded-full">
+        {project.category}
+      </span>
+    </div>
+  </motion.div>
+);
 
 export default function ProjectsSection() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -64,29 +101,39 @@ export default function ProjectsSection() {
       : projects.filter((p) => p.category === selectedCategory);
 
   return (
-    <section className="py-16 px-6 bg-gradient-to-b from-blue-50 to-white min-h-screen">
-      <div className="max-w-6xl mx-auto text-center">
-        <motion.h2
-          className="text-4xl font-extrabold text-blue-900 mb-4"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          Explore Our Innovative Projects
-        </motion.h2>
-        <p className="text-lg text-gray-600 mb-10">
-          Revolutionizing Technology with Cutting-Edge Innovations
-        </p>
+    <section
+      id="projects"
+      className="py-16 px-6 bg-gradient-to-b from-gray-50 to-white"
+    >
+      <div className="max-w-7xl mx-auto">
+        {/* Section Header */}
+        <div className="text-center mb-12">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+              Research Projects
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Innovative research projects spanning various domains of
+              mechanical engineering and advanced materials
+            </p>
+          </motion.div>
+        </div>
 
+        {/* Category Filters */}
         <div className="flex justify-center gap-4 flex-wrap mb-10">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2 rounded-full font-semibold border transition-all duration-300 hover:scale-105 hover:bg-blue-600 hover:text-white ${
+              className={`px-4 py-2 rounded-full font-medium transition-colors duration-300 ${
                 selectedCategory === category
-                  ? "bg-blue-700 text-white"
-                  : "bg-white text-blue-700 border-blue-700"
+                  ? "bg-primary text-white"
+                  : "bg-white text-gray-700 border border-gray-300 hover:border-primary hover:text-primary"
               }`}
             >
               {category}
@@ -94,52 +141,36 @@ export default function ProjectsSection() {
           ))}
         </div>
 
+        {/* Projects Grid */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-          layout
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: 0.1,
+              },
+            },
+          }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
         >
-          <AnimatePresence>
-            {filteredProjects.map((project) => (
-              <motion.div
-                key={project.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.5 }}
-                className="bg-white shadow-xl rounded-2xl overflow-hidden transform hover:scale-[1.05] hover:shadow-2xl hover:ring-4 hover:ring-blue-300 transition-all duration-500"
-              >
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6 text-left">
-                  <h3 className="text-xl font-bold text-blue-800 mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm mb-4">
-                    {project.description}
-                  </p>
-                  <span className="inline-block bg-blue-100 text-blue-600 text-xs px-3 py-1 rounded-full">
-                    {project.category}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+          {filteredProjects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
         </motion.div>
 
-        {/* View All Projects Button */}
-        <div className="mt-6">
-          <a
-            href="#"
-            className="inline-flex items-center px-6 py-3 rounded-full border border-gray-800 text-gray-800 font-medium group hover:bg-gray-800 hover:text-white hover:shadow-xl transition duration-300"
+        {/* View All Button */}
+        <motion.div className="mt-12 text-center" variants={fadeInUp}>
+          <motion.a
+            href="#contact"
+            className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-full"
+            whileHover={{ scale: 1.05 }}
           >
             View All Projects
-            <FaArrowRight className="ml-2 transition-transform group-hover:translate-x-1" size={20} />
-          </a>
-        </div>
+            <FaArrowRight className="ml-2" />
+          </motion.a>
+        </motion.div>
       </div>
     </section>
   );
