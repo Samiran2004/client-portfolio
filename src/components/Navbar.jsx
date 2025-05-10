@@ -29,7 +29,7 @@ const Navbar = () => {
         {mobileView && (
           <ul className="absolute right-0 w-48 mt-2 bg-white rounded-md shadow-lg font-medium">
             <li className="px-4 py-2 hover:bg-gray-100">
-              <Link className="text-blue-600" to="/home">
+              <Link to="/home">
                 Home
               </Link>
             </li>
